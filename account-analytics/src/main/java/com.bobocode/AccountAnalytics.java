@@ -167,7 +167,10 @@ public class AccountAnalytics {
      * @return a map where key is a last name and value is a set of first names
      */
     public Map<String, Set<String>> groupFirstNamesByLastNames() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                       .collect(collectingAndThen(groupingBy(Account::getLastName,
+                                                             mapping(Account::getFirstName, toUnmodifiableSet())),
+                                                  Collections::unmodifiableMap));
     }
 
     /**
