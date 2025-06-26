@@ -7,6 +7,7 @@ import com.bobocode.model.Sex;
 import java.math.BigDecimal;
 import java.time.Month;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
@@ -142,7 +143,8 @@ public class AccountAnalytics {
      * @return map of accounts by its ids
      */
     public Map<Long, Account> collectAccountsById() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                       .collect(toMap(Account::getId, Function.identity()));
     }
 
     /**
