@@ -193,7 +193,10 @@ public class AccountAnalytics {
      * @return a map where key is a creation month and value is total balance of all accounts created in that month
      */
     public Map<Month, BigDecimal> groupTotalBalanceByCreationMonth() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                       .collect(collectingAndThen(groupingBy(a -> a.getCreationDate().getMonth(),
+                                                             mapping(Account::getBalance, reducing(BigDecimal.ZERO, BigDecimal::add))),
+                                                  Collections::unmodifiableMap));
     }
 
     /**
