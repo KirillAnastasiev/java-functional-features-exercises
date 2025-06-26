@@ -92,7 +92,7 @@ public class CrazyLambdas {
      * @return binary sum operation
      */
     public static LongBinaryOperator longSumOperation() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return Math::addExact;
     }
 
     /**
