@@ -2,6 +2,7 @@ package com.bobocode;
 
 import com.bobocode.exception.EntityNotFoundException;
 import com.bobocode.model.Account;
+import com.bobocode.model.Sex;
 
 import java.math.BigDecimal;
 import java.time.Month;
@@ -52,7 +53,10 @@ public class AccountAnalytics {
      * @return a map where key is true or false, and value is list of male, and female accounts
      */
     public Map<Boolean, List<Account>> partitionMaleAccounts() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                       .collect(collectingAndThen(partitioningBy(a -> a.getSex() == Sex.MALE,
+                                                                 toUnmodifiableList()),
+                                                  Collections::unmodifiableMap));
     }
 
     /**
