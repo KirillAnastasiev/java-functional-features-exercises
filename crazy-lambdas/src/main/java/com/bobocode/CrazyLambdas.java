@@ -132,7 +132,11 @@ public class CrazyLambdas {
      * @return a thread supplier
      */
     public static Supplier<Thread> runningThreadSupplier(Runnable runnable) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return () -> {
+            Thread t = new Thread(runnable);
+            t.start();
+            return t;
+        };
     }
 
     /**
