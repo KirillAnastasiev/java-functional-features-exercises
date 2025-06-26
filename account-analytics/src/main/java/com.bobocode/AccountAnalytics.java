@@ -7,6 +7,7 @@ import com.bobocode.model.Sex;
 import java.math.BigDecimal;
 import java.time.Month;
 import java.util.*;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
 
@@ -78,7 +79,10 @@ public class AccountAnalytics {
      * @return total number of letters of first and last names of all accounts
      */
     public int getNumOfLettersInFirstAndLastNames() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return (int) accounts.stream()
+                             .flatMap(a -> Stream.of(a.getFirstName(), a.getLastName()))
+                             .flatMapToInt(String::chars)
+                             .count();
     }
 
     /**
