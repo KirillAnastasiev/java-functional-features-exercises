@@ -32,7 +32,7 @@ public class CrazyLambdas {
      * @return function that repeats Strings
      */
     public static BiFunction<String, Integer, String> stringMultiplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return String::repeat;
     }
 
     /**
