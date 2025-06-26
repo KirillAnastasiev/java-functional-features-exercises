@@ -129,7 +129,11 @@ public class AccountAnalytics {
      * @return account balance
      */
     public BigDecimal getBalanceByEmail(String email) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                       .filter(a -> email.equals(a.getEmail()))
+                       .findFirst()
+                       .map(Account::getBalance)
+                       .orElseThrow(() -> new EntityNotFoundException(String.format("Cannot find Account by email=%s", email)));
     }
 
     /**
