@@ -206,7 +206,12 @@ public class AccountAnalytics {
      * @return a map where key is a letter and value is its count in all first names
      */
     public Map<Character, Long> getCharacterFrequencyInFirstNames() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                       .map(Account::getFirstName)
+                       .flatMapToInt(String::chars)
+                       .mapToObj(cp -> (char) cp)
+                       .collect(collectingAndThen(groupingBy(Function.identity(), counting()),
+                                                  Collections::unmodifiableMap));
     }
 
     /**
