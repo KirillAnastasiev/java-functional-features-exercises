@@ -103,7 +103,9 @@ public class AccountAnalytics {
      * @return list of accounts sorted by first and last names
      */
     public List<Account> sortByFirstAndLastNames() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                       .sorted(Comparator.comparing(Account::getFirstName).thenComparing(Account::getLastName))
+                       .collect(toUnmodifiableList());
     }
 
     /**
