@@ -221,7 +221,13 @@ public class AccountAnalytics {
      * @return a map where key is a letter and value is its count ignoring case in all first and last names
      */
     public Map<Character, Long> getCharacterFrequencyIgnoreCaseInFirstAndLastNames() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                       .flatMap(a -> Stream.of(a.getFirstName(), a.getLastName()))
+                       .flatMapToInt(String::chars)
+                       .map(Character::toLowerCase)
+                       .mapToObj(cp -> (char) cp)
+                       .collect(collectingAndThen(groupingBy(Function.identity(), counting()),
+                                                  Collections::unmodifiableMap));
     }
 
 }
