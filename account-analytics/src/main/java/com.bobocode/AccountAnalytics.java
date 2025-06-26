@@ -115,7 +115,10 @@ public class AccountAnalytics {
      * @return true if there is an account that has an email with provided domain
      */
     public boolean containsAccountWithEmailDomain(String emailDomain) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                       .map(Account::getEmail)
+                       .map(e -> e.split("@")[1])
+                       .anyMatch(emailDomain::equals);
     }
 
     /**
