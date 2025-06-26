@@ -101,7 +101,7 @@ public class CrazyLambdas {
      * @return string to int converter
      */
     public static ToIntFunction<String> stringToIntConverter() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return Integer::parseInt;
     }
 
     /**
