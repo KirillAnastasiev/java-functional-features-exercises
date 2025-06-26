@@ -180,7 +180,10 @@ public class AccountAnalytics {
      * @return a map where a key is a birthday month and value is comma-separated first names
      */
     public Map<Month, String> groupCommaSeparatedFirstNamesByBirthdayMonth() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                       .collect(collectingAndThen(groupingBy(a -> a.getBirthday().getMonth(),
+                                                             mapping(Account::getFirstName, joining(", "))),
+                                                  Collections::unmodifiableMap));
     }
 
     /**
