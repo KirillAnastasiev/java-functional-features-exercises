@@ -121,7 +121,7 @@ public class CrazyLambdas {
      * @return function that composes functions with trim() function
      */
     public static UnaryOperator<Function<String, String>> composeWithTrimFunction() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return func -> func.compose(String::trim);
     }
 
     /**
