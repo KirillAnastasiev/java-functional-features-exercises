@@ -7,8 +7,7 @@ import java.math.BigDecimal;
 import java.time.Month;
 import java.util.*;
 
-import static java.util.stream.Collectors.mapping;
-import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.*;
 
 /**
  * Implement methods using Stream API
@@ -41,7 +40,9 @@ public class AccountAnalytics {
      * @return a list of accounts
      */
     public List<Account> findAccountsByBirthdayMonth(Month birthdayMonth) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                       .filter(a -> a.getBirthday().getMonth() == birthdayMonth)
+                       .collect(toUnmodifiableList());
     }
 
     /**
